@@ -1,10 +1,19 @@
 (ns markov.core
-  (:require [goog.dom :as dom]
-            clojure.string))
+  (:require clojure.string))
+
+;; I/O with the DOM 
+
+(defn input []
+  (.-value (.getElementById js/document "text")))
+  
+(defn output [s]
+  (set! (.-innerHTML (.getElementById js/document "output")) s))
+  
+;; Markov chain generation
 
 (defn markov-data [line]
   (let [l (if (= \. (last line)) line (str line "."))
-        words (filter #(re-find #"[a-z]" %) (.split l " "))
+        words (filter #(re-find #"[a-z]" %) (clojure.string/split l #"\s"))
         ks (concat ["*START*"] (butlast words))
         pairs (partition 2 (interleave ks words))
         maps (for [p pairs] {(first p) [(second p)]})]
@@ -15,16 +24,12 @@
         i (rand-int n)]
     (nth ws i)))
 
-(defn markov []
-  (let [text (.-value (.getElementById js/document "text"))]
-    (let [sentences (clojure.string/split text #"\n")]
-      (apply merge-with concat (map markov-data sentences)))))
+(defn markov [text]
+  (let [sentences (clojure.string/split text #"\n")]
+    (apply merge-with concat (map markov-data sentences))))
 
-(defn output [s]
-  (set! (.-innerHTML (dom/getElement "output")) s))
-  
 (defn generate []
-  (let [data (markov)]
+  (let [data (markov (input))]
     (loop [k (random-word (data "*START*"))
            acc [k]]
       (let [ws (data k)
