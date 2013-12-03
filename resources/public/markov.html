@@ -1,0 +1,29 @@
+<html>
+  <style type="text/css">
+    body {font-family: verdana, arial, helvetica}
+    a:link {text-decoration:none;}
+    tr:nth-child(even) {background: #EEE}
+    tr:nth-child(odd) {background: #FFF}
+  </style>
+  <script type="text/javascript" src="js/markov.js"></script>
+  <head>
+    <title>Text Generation with Markov Chains</title>
+  </head>
+  <body>
+    <h1>Text Generation with Markov Chains</h1>
+    <textarea id="text" rows="20" cols="80">
+The motivation to make this proposal stems from observations of the way physical bitcoins and paper wallets are used.
+An issuer of physical bitcoins must be trustworthy and trusted. Even if trustworthy, users are rightful to be skeptical about a third party with theoretical access to take their funds. A physical bitcoin that cannot be compromised by its issuer is always more intrinsically valuable than one that can.
+A two-factor physical bitcoin solution is highly useful to individuals and organizations wishing to securely own bitcoins without any risk of electronic theft and without the responsibility of climbing the technological learning curve necessary to produce such an environment themselves. Two-factor physical bitcoins allow a secure storage solution to be put in a box and sold on the open market, greatly enlarging the number of people who are able to securely store bitcoins.
+Existing methodologies for creating two-factor physical bitcoins are limited and cumbersome. At the time of this proposal, a user could create their own private key, submit the public key to the physical bitcoin issuer, and then receive a physical bitcoin that must be kept together with some sort of record of the user-generated private key, and finally, must be redeemed through a tool. The fact that the physical bitcoin must be kept together with a user-produced private key negates much of the benefit of the physical bitcoin - the user may as well just print and maintain a private key.
+A standardized password-protected private key format makes acquiring and redeeming two-factor physical bitcoins simpler for the user. Instead of maintaining a private key that cannot be memorized, the user may choose a passphrase of their choice. The passphrase may be much shorter than the length of a typical private key, short enough that they could use a label or engraver to permanently commit their passphrase to their physical Bitcoin piece once they have received it. By adopting a standard way to encrypt a private key, we maximize the possibility that they'll be able to redeem their funds in the venue of their choice, rather than relying on an executable redemption tool they may not wish to download.
+Password and passphrase-protected private keys enable new practical use cases for sending bitcoins from person to person. Someone wanting to send bitcoins through postal mail could send a password-protected paper wallet and give the recipient the passphrase over the phone or e-mail, making the transfer safe from interception of either channel. A user of paper wallets or Bitcoin banknote-style vouchers ("cash") could carry funded encrypted private keys while leaving a copy at home as an element of protection against accidental loss or theft. A user of paper wallets who leaves bitcoins in a bank vault or safety deposit box could keep the password at home or share it with trusted associates as protection against someone at the bank gaining access to the paper wallets and spending from them. The foreseeable and unforeseeable use cases for password-protected private keys are numerous.
+</textarea><p></p>
+    <button id="generate" onclick="markov.core.generate()">Generate gibberish!</button><p></p>
+    
+    Output: <span id="output"></span><p/>
+
+
+    <p/>
+  </body>
+</html>
