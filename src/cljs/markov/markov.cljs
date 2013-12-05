@@ -27,7 +27,7 @@
   (let [data (text-to-markov (input))]
     (loop [ws (data "*START*")
            acc []]
-      (let [w (-> ws shuffle first)
+      (let [w (rand-nth ws)
             nws (data w)
             nacc (concat acc [w])]
         (if (= \. (last w))
