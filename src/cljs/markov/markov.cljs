@@ -13,10 +13,8 @@
 
 (defn markov-data [line]
   (let [l (if (= \. (last line)) line (str line "."))
-        words (clojure.string/split l #"\s")
-        ks (concat ["*START*"] (butlast words))
-        pairs (partition 2 (interleave ks words))
-        maps (for [p pairs] {(first p) [(second p)]})]
+        words (cons "*START*" (clojure.string/split l #"\s"))
+        maps (for [p (partition 2 1 words)] {(first p) [(second p)]})]
     (apply merge-with concat maps)))
 
 (defn text-to-markov [text]
