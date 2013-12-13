@@ -22,14 +22,16 @@
           m)]
     (apply merge-with concat maps)))
 
+(defn sentence [data]
+  (loop [ws (data "*START*")
+         acc []]
+    (let [w (rand-nth ws)
+          nws (data w)
+          nacc (concat acc [w])]
+      (if (= \. (last w))
+        (clojure.string/join " " nacc)
+        (recur nws nacc)))))
 
 (defn generate []
-  (let [data (markov-data (input))]
-    (loop [ws (data "*START*")
-           acc []]
-      (let [w (rand-nth ws)
-            nws (data w)
-            nacc (concat acc [w])]
-        (if (= \. (last w))
-          (output (clojure.string/join " " nacc))
-          (recur nws nacc))))))
+  (let [d (markov-data (input))]
+    (output (clojure.string/join " " (take 6 (repeatedly #(sentence d)))))))
